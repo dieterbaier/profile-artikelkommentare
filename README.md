@@ -1,51 +1,51 @@
-# Artikelkommentare für dieterbaier.eu
+# Article comments for dieterbaier.eu
 
-Dieses Repository enthält öffentliche Kommentare zu den Artikeln auf
-[dieterbaier.eu](https://dieterbaier.eu/).
+This repository contains public comments on the articles at
+[dieterbaier.[eu, at, info, com]](https://dieterbaier.eu/).
 
-Die Website bleibt vollständig statisch. Wer einen Artikel kommentieren möchte,
-öffnet über den jeweiligen Artikel ein vorausgefülltes GitHub-Issue in diesem
-Repository. Bestehende Kommentare werden erst geladen, nachdem Leserinnen oder
-Leser dies ausdrücklich anfordern.
+The website remains entirely static. Anyone wishing to comment on an article
+can open a pre-filled GitHub issue in this
+repository via the relevant article. Existing comments are only loaded once readers
+explicitly request them.
 
-## Einen Artikel kommentieren
+## Commenting on an article
 
-Kommentare werden normalerweise über den Link **Diesen Artikel kommentieren**
-im jeweiligen Artikel angelegt. Dadurch sind Artikel-ID, Artikeltitel und
-Artikel-URL bereits vorausgefüllt.
+Comments are normally created via the **Comment on this article**
+link in the relevant article. This means that the article ID, article title and
+article URL are already pre-filled.
 
-Alle Kommentare sind öffentlich. Bitte veröffentliche keine vertraulichen oder
-personenbezogenen Informationen, die nicht öffentlich sichtbar sein sollen.
+All comments are public. Please do not publish any confidential or
+personal information that should not be publicly visible.
 
-## Zuordnung
+## Assignment
 
-Eine GitHub Action erkennt das strukturierte Issue Form und legt das feste Label
-`Artikelkommentar` bei Bedarf selbst an. Sie liest außerdem die Artikel-ID aus
-dem Issue-Body und prüft sie gegen `config/allowed-article-ids.json`. Nur IDs von
-publizierten Website-Artikeln erhalten ein artikelspezifisches Label wie
+A GitHub Action recognises the structured issue form and creates the fixed label
+`Artikelkommentar` itself if necessary. It also reads the article ID from
+the issue body and checks it against `config/allowed-article-ids.json`. Only IDs of
+published website articles are assigned an article-specific label such as
 `ART-003-doc-as-code`.
 
-Das Profil-Repository erzeugt diese Allowlist aus seinen Metadaten und
-synchronisiert sie nach einem erfolgreichen Public-Site-Deployment. Der dafür
-verwendete Token benötigt Schreibzugriff auf dieses Repository.
+The profile repository generates this allowlist from its metadata and
+synchronises it following a successful public site deployment. The token
+used for this requires write access to this repository.
 
-Beim Bearbeiten eines Issues synchronisiert die Action das Artikel-ID-Label
-erneut. Andere Labels und der eigentliche Kommentar bleiben unverändert.
+When an issue is edited, the action resynchronises the article ID label
+. Other labels and the actual comment remain unchanged.
 
-Damit lassen sich alle Artikelkommentare beispielsweise so filtern:
+This allows all article comments to be filtered, for example, as follows:
 
 ```text
 is:issue label:Artikelkommentar
 ```
 
-Kommentare zu einem bestimmten Artikel lassen sich mit beiden Labels finden:
+Comments on a specific article can be found using both labels:
 
 ```text
 is:issue label:Artikelkommentar label:ART-003-doc-as-code
 ```
 
-## Lizenz
+## Licence
 
-Die Automatisierung und Repository-Struktur stehen unter der [MIT-Lizenz](LICENSE).
-Die von GitHub-Nutzerinnen und -Nutzern eingestellten Kommentare bleiben Inhalte
-der jeweiligen Verfassenden und werden durch die MIT-Lizenz nicht neu lizenziert.
+The automation and repository structure are licensed under the [MIT Licence](LICENSE).
+Comments posted by GitHub users remain the property
+of their respective authors and are not re-licensed under the MIT Licence.
