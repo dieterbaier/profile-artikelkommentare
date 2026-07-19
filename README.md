@@ -10,7 +10,7 @@ explicitly request them.
 
 ## Commenting on an article
 
-Comments are normally created via the **Comment on this article**
+Comments are normally created via the **Comment on this article** (_Diesen Artikel kommentieren_)
 link in the relevant article. This means that the article ID, article title and
 article URL are already pre-filled.
 
@@ -25,7 +25,7 @@ the issue body and checks it against `config/allowed-article-ids.json`. Only IDs
 published website articles are assigned an article-specific label such as
 `ART-003-doc-as-code`.
 
-The profile repository generates this allowlist from its metadata and
+The [`profile` repository](https://github.com/dieterbaier/profile) generates this allowlist from its metadata and
 synchronises it following a successful public site deployment. The token
 used for this requires write access to this repository.
 
