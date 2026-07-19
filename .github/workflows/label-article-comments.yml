@@ -1,0 +1,74 @@
+name: Artikelkommentar zuordnen
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  label-article:
+    if: contains(github.event.issue.labels.*.name, 'Artikelkommentar')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Artikel-ID als Label zuweisen
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+            const lines = body.split(/\r?\n/);
+            const heading = lines.findIndex(line => line.trim() === '### Artikel-ID');
+            const articleId = heading < 0
+              ? ''
+              : lines.slice(heading + 1).find(line => line.trim())?.trim() || '';
+
+            if (!/^ART-[0-9]{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(articleId)) {
+              core.setFailed(`Ungültige oder fehlende Artikel-ID: ${articleId || '<leer>'}`);
+              return;
+            }
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.issue.number;
+            const articleLabelPattern = /^ART-[0-9]{3}-[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+            try {
+              await github.rest.issues.createLabel({
+                owner,
+                repo,
+                name: articleId,
+                color: '1D76DB',
+                description: `Kommentare zum Artikel ${articleId}`
+              });
+            } catch (error) {
+              if (error.status !== 422) throw error;
+            }
+
+            const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+              owner,
+              repo,
+              issue_number,
+              per_page: 100
+            });
+
+            for (const label of labels) {
+              if (articleLabelPattern.test(label.name) && label.name !== articleId) {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number,
+                  name: label.name
+                });
+              }
+            }
+
+            await github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number,
+              labels: [articleId]
+            });

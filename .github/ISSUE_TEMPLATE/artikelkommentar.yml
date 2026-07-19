@@ -1,0 +1,57 @@
+name: Artikel kommentieren
+description: Öffentlichen Kommentar zu einem Artikel hinterlassen
+title: "[Artikelkommentar] "
+labels:
+  - Artikelkommentar
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vielen Dank für deinen Kommentar.
+
+        Der Kommentar wird als öffentliches GitHub-Issue gespeichert.
+        Bitte verändere die vorausgefüllten Artikeldaten nicht.
+
+  - type: input
+    id: article_id
+    attributes:
+      label: Artikel-ID
+      description: Technische Kennung des kommentierten Artikels
+      placeholder: ART-003-doc-as-code
+    validations:
+      required: true
+
+  - type: input
+    id: article_title
+    attributes:
+      label: Artikel
+      description: Titel des kommentierten Artikels
+      placeholder: Dokumentation als Code
+    validations:
+      required: true
+
+  - type: input
+    id: article_url
+    attributes:
+      label: Artikel-URL
+      description: Adresse des kommentierten Artikels
+      placeholder: https://dieterbaier.eu/articles/documentation/doc-as-code.html
+    validations:
+      required: true
+
+  - type: textarea
+    id: comment
+    attributes:
+      label: Kommentar
+      description: Fragen, Ergänzungen und konstruktives Feedback sind willkommen.
+      placeholder: Mein Kommentar zum Artikel …
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: public_notice
+    attributes:
+      label: Öffentliche Veröffentlichung
+      options:
+        - label: Mir ist bewusst, dass dieser Kommentar öffentlich sichtbar ist.
+          required: true
