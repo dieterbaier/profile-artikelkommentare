@@ -19,9 +19,15 @@ personenbezogenen Informationen, die nicht öffentlich sichtbar sein sollen.
 
 ## Zuordnung
 
-Das Issue Form weist jedem Kommentar das feste Label `Artikelkommentar` zu. Eine
-GitHub Action liest außerdem die Artikel-ID aus dem strukturierten Issue-Body und
-weist ein artikelspezifisches Label wie `ART-003-doc-as-code` zu.
+Eine GitHub Action erkennt das strukturierte Issue Form und legt das feste Label
+`Artikelkommentar` bei Bedarf selbst an. Sie liest außerdem die Artikel-ID aus
+dem Issue-Body und prüft sie gegen `config/allowed-article-ids.json`. Nur IDs von
+publizierten Website-Artikeln erhalten ein artikelspezifisches Label wie
+`ART-003-doc-as-code`.
+
+Das Profil-Repository erzeugt diese Allowlist aus seinen Metadaten und
+synchronisiert sie nach einem erfolgreichen Public-Site-Deployment. Der dafür
+verwendete Token benötigt Schreibzugriff auf dieses Repository.
 
 Beim Bearbeiten eines Issues synchronisiert die Action das Artikel-ID-Label
 erneut. Andere Labels und der eigentliche Kommentar bleiben unverändert.
