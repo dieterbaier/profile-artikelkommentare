@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "article_ids": [
+    "ART-001-intentionally-simple-website",
+    "ART-002-smarter-cicd",
+    "ART-003-doc-as-code"
+  ]
+}
